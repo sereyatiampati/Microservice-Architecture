@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{DF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheJitu_Commerce_Auth", "TheJitu_Commerce_Auth\TheJitu_Commerce_Auth.csproj", "{19F436AE-63CF-458B-9314-ED869A254069}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheJitu_commerce_Coupons", "TheJitu_commerce_Coupons\TheJitu_commerce_Coupons.csproj", "{DA288A0D-3AEF-42D0-8DC5-10E4285042FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,12 +23,17 @@ Global
 		{19F436AE-63CF-458B-9314-ED869A254069}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F436AE-63CF-458B-9314-ED869A254069}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19F436AE-63CF-458B-9314-ED869A254069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA288A0D-3AEF-42D0-8DC5-10E4285042FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA288A0D-3AEF-42D0-8DC5-10E4285042FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA288A0D-3AEF-42D0-8DC5-10E4285042FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA288A0D-3AEF-42D0-8DC5-10E4285042FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{19F436AE-63CF-458B-9314-ED869A254069} = {DFA5F4E5-F099-427A-8336-6079A6A44903}
+		{DA288A0D-3AEF-42D0-8DC5-10E4285042FC} = {DFA5F4E5-F099-427A-8336-6079A6A44903}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F574DA5E-D559-447B-AFE6-6411F9ED8FC5}

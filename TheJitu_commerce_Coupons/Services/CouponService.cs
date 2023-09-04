@@ -14,14 +14,14 @@ namespace TheJitu_commerce_Coupons.Services
         }
         public async Task<string> AddCouponAsync(Coupon coupon)
         {
-            _context.Add(coupon);
+            _context.Coupons.Add(coupon);
             await _context.SaveChangesAsync();
             return "Coupon Added Successfully";
         }
 
         public async  Task<string> DeleteCouponAsync(Coupon coupon)
         {
-            _context.Remove(coupon);
+            _context.Coupons.Remove(coupon);
             await _context.SaveChangesAsync();
             return "Coupon Removed Successfully";
         }
@@ -43,7 +43,7 @@ namespace TheJitu_commerce_Coupons.Services
 
         public async Task<string> UpdateCouponAsync(Coupon coupon)
         {
-            _context.Update(coupon);
+            _context.Coupons.Update(coupon);
             await _context.SaveChangesAsync();
             return "Coupon Updated Successfully";
         }

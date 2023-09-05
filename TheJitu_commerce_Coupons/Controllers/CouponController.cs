@@ -10,7 +10,7 @@ namespace TheJitu_commerce_Coupons.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CouponController : ControllerBase
     {   
 
@@ -56,7 +56,7 @@ namespace TheJitu_commerce_Coupons.Controllers
             return Ok(_responseDto);
         }
 
-        [HttpGet("GetByName{code}")]
+        [HttpGet("GetByName/{code}")]
         public async Task<ActionResult<ResponseDto>> GetCoupon(string code )
         {
             var coupon= await _couponInterface.GetCouponByNameAsync(code);

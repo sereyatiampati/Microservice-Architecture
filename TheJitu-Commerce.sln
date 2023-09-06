@@ -15,7 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheJitu_commerce_Coupons", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheJitu_Commerce_Product", "TheJitu_Commerce_Product\TheJitu_Commerce_Product.csproj", "{3ED08AD8-508B-4CC5-B58B-09249C1081C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheJitu_Commerce_Cart", "TheJitu_Commerce_Cart\TheJitu_Commerce_Cart.csproj", "{2F24D2FF-F13F-409C-ACCE-B249FC6C6606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheJitu_Commerce_Cart", "TheJitu_Commerce_Cart\TheJitu_Commerce_Cart.csproj", "{2F24D2FF-F13F-409C-ACCE-B249FC6C6606}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheJituMessageBus", "TheJituMessageBus\TheJituMessageBus.csproj", "{3C562A2D-76FC-4396-A2A0-F8E1F26F6E21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheJitu_commerce_EmailService", "TheJitu_commerce_EmailService\TheJitu_commerce_EmailService.csproj", "{2BDE0540-5C49-4005-B989-A73C1AC576F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheJitu_commerce_Order", "TheJitu_commerce_Order\TheJitu_commerce_Order.csproj", "{ECB336CE-412C-41B3-9E32-C0EB6B1DC6EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,18 @@ Global
 		{2F24D2FF-F13F-409C-ACCE-B249FC6C6606}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F24D2FF-F13F-409C-ACCE-B249FC6C6606}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F24D2FF-F13F-409C-ACCE-B249FC6C6606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C562A2D-76FC-4396-A2A0-F8E1F26F6E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C562A2D-76FC-4396-A2A0-F8E1F26F6E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C562A2D-76FC-4396-A2A0-F8E1F26F6E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C562A2D-76FC-4396-A2A0-F8E1F26F6E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BDE0540-5C49-4005-B989-A73C1AC576F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BDE0540-5C49-4005-B989-A73C1AC576F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BDE0540-5C49-4005-B989-A73C1AC576F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BDE0540-5C49-4005-B989-A73C1AC576F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECB336CE-412C-41B3-9E32-C0EB6B1DC6EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECB336CE-412C-41B3-9E32-C0EB6B1DC6EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECB336CE-412C-41B3-9E32-C0EB6B1DC6EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECB336CE-412C-41B3-9E32-C0EB6B1DC6EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +66,9 @@ Global
 		{DA288A0D-3AEF-42D0-8DC5-10E4285042FC} = {DFA5F4E5-F099-427A-8336-6079A6A44903}
 		{3ED08AD8-508B-4CC5-B58B-09249C1081C5} = {DFA5F4E5-F099-427A-8336-6079A6A44903}
 		{2F24D2FF-F13F-409C-ACCE-B249FC6C6606} = {DFA5F4E5-F099-427A-8336-6079A6A44903}
+		{3C562A2D-76FC-4396-A2A0-F8E1F26F6E21} = {CF2E58BB-839B-46DA-9B9A-9512622D2335}
+		{2BDE0540-5C49-4005-B989-A73C1AC576F0} = {DFA5F4E5-F099-427A-8336-6079A6A44903}
+		{ECB336CE-412C-41B3-9E32-C0EB6B1DC6EA} = {DFA5F4E5-F099-427A-8336-6079A6A44903}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F574DA5E-D559-447B-AFE6-6411F9ED8FC5}

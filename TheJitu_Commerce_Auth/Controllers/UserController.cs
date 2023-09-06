@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TheJitu_Commerce_Auth.Model.Dtos;
 using TheJitu_Commerce_Auth.Services.IService;
+using TheJituMessageBus;
 
 namespace TheJitu_Commerce_Auth.Controllers
 {
@@ -12,11 +13,16 @@ namespace TheJitu_Commerce_Auth.Controllers
 
         private IUserInterface _userInterface;
         private readonly ResponseDto _response;
-        public UserController(IUserInterface userInterface)
+        private readonly IMessageBus _messageBus;
+        private readonly IConfiguration _configuration;
+        public UserController(IUserInterface userInterface, IConfiguration configuration,IMessageBus message)
         {
             _userInterface = userInterface;
             //Don't inject just initialize
             _response = new ResponseDto();
+            _configuration = configuration;
+            _messageBus = message;
+
         }
 
         [HttpPost("register")]
@@ -31,7 +37,15 @@ namespace TheJitu_Commerce_Auth.Controllers
 
                 return BadRequest(_response);
             }
+            //send a message to our ServiceBus --Queue
+            var queueName = _configuration.GetSection("QueuesandTopics:RegisterUser").Get<string>();
 
+            var message = new UserMessage()
+            {
+                Email = registerRequestDto.Email,
+                Name = registerRequestDto.Name,
+            };
+            await _messageBus.PublishMessage(message, queueName);
             return Ok(_response);
         }
 

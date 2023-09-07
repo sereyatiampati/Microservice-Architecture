@@ -7,5 +7,9 @@ namespace TheJitu_commerce_Order.Services.Iservice
     {
         Task<OrderHeaderDto> CreateOrderHeader(CartDto cartDto);
 
+
+        Task<StripeRequestDto> StripePayment(StripeRequestDto stripeRequestDto);
+
+        Task<bool> ValidatePayment(Guid OrderId);
     }
 }

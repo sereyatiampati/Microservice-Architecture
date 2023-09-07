@@ -36,11 +36,12 @@ namespace TheJitu_commerce_Coupons.Controllers
             }
 
             _responseDto.Result = coupons;
+           
             return Ok(_responseDto);
         }
 
         [HttpPost]
-        [Authorize(Roles ="Admin")]
+        //[Authorize(Roles ="Admin")]
         public async Task<ActionResult<ResponseDto>> AddCoupon(CouponRequestDto couponRequest)
         {
             var newCoupon = _mapper.Map<Coupon>(couponRequest);
@@ -53,6 +54,19 @@ namespace TheJitu_commerce_Coupons.Controllers
             }
 
             _responseDto.Result = response;
+
+            //create coupons in Stripe
+            var options = new Stripe.CouponCreateOptions()
+            {
+                AmountOff = (long)(couponRequest.CouponAmount * 100),
+                Currency = "kes",
+                Id = couponRequest.CouponCode,
+                Name = couponRequest.CouponCode
+
+            };
+
+            var service = new Stripe.CouponService();
+            service.Create(options);
             return Ok(_responseDto);
         }
 
@@ -90,7 +104,7 @@ namespace TheJitu_commerce_Coupons.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<ResponseDto>> DeleteCoupon(Guid id)
         {
             var coupon = await _couponInterface.GetCouponByIdAsync(id);
@@ -101,7 +115,8 @@ namespace TheJitu_commerce_Coupons.Controllers
                 return BadRequest(_responseDto);
             }
             //delete
-            
+            var service = new Stripe.CouponService();
+            service.Delete(coupon.CouponCode);
             var response = await _couponInterface.DeleteCouponAsync(coupon);
             _responseDto.Result = response;
             return Ok(_responseDto);

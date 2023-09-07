@@ -3,6 +3,7 @@ using TheJitu_commerce_Order.Data;
 using TheJitu_commerce_Order.Extensions;
 using TheJitu_commerce_Order.Services;
 using TheJitu_commerce_Order.Services.Iservice;
+using TheJituMessageBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +19,15 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 //AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+builder.Services.AddScoped<IMessageBus, MessageBus>();
 
 //Services
 builder.Services.AddScoped<IOrderService,OrderService>();
 var app = builder.Build();
+
+
+//Register for Stripe
+Stripe.StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:Key").Get<string>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

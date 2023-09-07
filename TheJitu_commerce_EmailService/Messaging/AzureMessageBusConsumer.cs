@@ -1,6 +1,7 @@
 ﻿using Azure.Messaging.ServiceBus;
 using Newtonsoft.Json;
 using System.Text;
+
 using TheJitu_commerce_EmailService.Models;
 using TheJitu_commerce_EmailService.Services;
 
@@ -12,6 +13,7 @@ namespace TheJitu_commerce_EmailService.Messaging
         private readonly string Connectionstring;
         private readonly string QueueName;
         private readonly ServiceBusProcessor _registrationProcessor;
+        private readonly ServiceBusProcessor _orderEmails;
         private readonly EmailSendService _emailService;
         private readonly EmailService _saveToDb;
         public AzureMessageBusConsumer(IConfiguration configuration ,EmailService service)
@@ -24,6 +26,7 @@ namespace TheJitu_commerce_EmailService.Messaging
 
             var serviceBusClient = new ServiceBusClient(Connectionstring);
             _registrationProcessor = serviceBusClient.CreateProcessor(QueueName);
+            _orderEmails = serviceBusClient.CreateProcessor("ordertopic", "OrderEmailCreated");
             _emailService = new EmailSendService();
             _saveToDb = service;
 
@@ -35,7 +38,34 @@ namespace TheJitu_commerce_EmailService.Messaging
             _registrationProcessor.ProcessMessageAsync += OnRegistartion;
             _registrationProcessor.ProcessErrorAsync += ErrorHandler;
             await _registrationProcessor.StartProcessingAsync();
+
+            _orderEmails.ProcessMessageAsync += OnOrder;
+            _orderEmails.ProcessErrorAsync += ErrorHandler;
+            await _orderEmails.StartProcessingAsync();
         }
+
+        private async Task OnOrder(ProcessMessageEventArgs arg)
+        {
+            var message = arg.Message;
+
+            var body = Encoding.UTF8.GetString(message.Body);
+
+            var rewards = JsonConvert.DeserializeObject<RewardsDto>(body);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<h1> Order Proccessed </h1>");
+            sb.Append("<p> order  will be shipped tomorrow</p>");
+
+            var Umessage = new UserMessage()
+            {
+                Email = rewards.Email,
+                Name = "John Doe"
+            };
+
+            await _emailService.SendEmail(Umessage, sb.ToString());
+
+        }
+
         public async Task Stop()
         {
             //Stop Processing

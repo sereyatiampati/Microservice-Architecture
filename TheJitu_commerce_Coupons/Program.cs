@@ -29,7 +29,7 @@ builder.AddSwaggenGenExtension();
 builder.AddAppAuthentication();
 
 var app = builder.Build();
-
+Stripe.StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:Key").Get<string>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

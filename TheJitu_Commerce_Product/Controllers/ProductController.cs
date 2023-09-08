@@ -11,6 +11,7 @@ namespace TheJitu_Commerce_Product.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IMapper _mapper;

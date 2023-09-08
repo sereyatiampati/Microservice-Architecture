@@ -7,11 +7,20 @@ namespace TheJitu_commerce_EmailService.Services
 {
     public class EmailSendService
     {
+       
+        private readonly string email ;
+        private readonly string password;
+        public EmailSendService(IConfiguration _configuration)
+        {
+            
+             email = _configuration.GetSection("EmailService:Email").Get<string>();
+             password = _configuration.GetSection("EmailService:Password").Get<string>();
+        }
 
         public async Task SendEmail(UserMessage res, string message)
         {
             MimeMessage message1 = new MimeMessage();
-            message1.From.Add(new MailboxAddress("THE Jitu E-Commerce ", "joepay592@gmail.com"));
+            message1.From.Add(new MailboxAddress("THE Jitu E-Commerce ",email));
 
             // Set the recipient's email address
             message1.To.Add(new MailboxAddress(res.Name, res.Email));
@@ -28,7 +37,7 @@ namespace TheJitu_commerce_EmailService.Services
 
             client.Connect("smtp.gmail.com", 587, false);
 
-            client.Authenticate("joepay592@gmail.com", "oczc ivvn vihe ldaa");
+            client.Authenticate(email, password);
 
             await client.SendAsync(message1);
 

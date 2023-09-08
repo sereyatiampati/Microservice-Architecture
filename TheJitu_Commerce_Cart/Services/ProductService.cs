@@ -15,15 +15,22 @@ namespace TheJitu_Commerce_Cart.Services
         }
         public async  Task<IEnumerable<ProductDto>> GetProductaAsync()
         {
-          //Create a client
-          var client = _clientFactory.CreateClient("Product");
-            var response = await client.GetAsync("/api/Product");
-            var content = await response.Content.ReadAsStringAsync();
-            var responseDto= JsonConvert.DeserializeObject<ResponseDto>(content);
-
-            if (responseDto.IsSuccess)
+            //Create a client
+            try
             {
-                return JsonConvert.DeserializeObject<IEnumerable<ProductDto>>(Convert.ToString(responseDto.Result));
+                var client = _clientFactory.CreateClient("Product");
+                var response = await client.GetAsync("/api/Product");
+                var content = await response.Content.ReadAsStringAsync();
+                var responseDto = JsonConvert.DeserializeObject<ResponseDto>(content);
+
+                if (responseDto.IsSuccess)
+                {
+                    return JsonConvert.DeserializeObject<IEnumerable<ProductDto>>(Convert.ToString(responseDto.Result));
+                }
+                
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             return new List<ProductDto>();
 

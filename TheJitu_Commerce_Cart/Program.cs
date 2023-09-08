@@ -3,6 +3,7 @@ using TheJitu_Commerce_Cart.Data;
 using TheJitu_Commerce_Cart.Extensions;
 using TheJitu_Commerce_Cart.Services;
 using TheJitu_Commerce_Cart.Services.Iservice;
+using TheJitu_Commerce_Cart.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,13 +23,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-//Registering the Base Url for the services
-builder.Services.AddHttpClient("Product", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:ProductApi"]));
-builder.Services.AddHttpClient("Coupon", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:CouponApi"]));
+builder.Services.AddHttpContextAccessor();
 //Services
 builder.Services.AddScoped<ICartservice, CartService>();
-builder.Services.AddScoped<IProductInterface,ProductService>();
-builder.Services.AddScoped<ICouponService, CouponService>();    
+builder.Services.AddScoped<IProductInterface, ProductService>();
+builder.Services.AddScoped<ICouponService, CouponService>();
+builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
+//Registering the Base Url for the services
+builder.Services.AddHttpClient("Product", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:ProductApi"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
+builder.Services.AddHttpClient("Coupon", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:CouponApi"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
+    
 //custom builders
 
 builder.AddSwaggenGenExtension();
@@ -45,7 +49,7 @@ if (app.Environment.IsDevelopment())
 //migration
 app.UseMigration();
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

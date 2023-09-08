@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheJitu_commerce_Order.Model.Dto;
 using TheJitu_commerce_Order.Models.Dto;
@@ -8,6 +9,7 @@ namespace TheJitu_commerce_Order.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrderController : ControllerBase
     {
 

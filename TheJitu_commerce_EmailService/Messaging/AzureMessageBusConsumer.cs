@@ -12,6 +12,8 @@ namespace TheJitu_commerce_EmailService.Messaging
         private readonly IConfiguration _configuration;
         private readonly string Connectionstring;
         private readonly string QueueName;
+        private readonly string topic;
+        private readonly string subscription;
         private readonly ServiceBusProcessor _registrationProcessor;
         private readonly ServiceBusProcessor _orderEmails;
         private readonly EmailSendService _emailService;
@@ -21,13 +23,15 @@ namespace TheJitu_commerce_EmailService.Messaging
 
             _configuration = configuration;
             Connectionstring= _configuration.GetSection("ServiceBus:ConnectionString").Get<string>();
-
             QueueName= _configuration.GetSection("QueuesandTopics:RegisterUser").Get<string>();
+            topic = _configuration.GetSection("AzureService:Topic").Get<string>();
+            subscription = _configuration.GetSection("AzureService:Subscription").Get<string>();
+
 
             var serviceBusClient = new ServiceBusClient(Connectionstring);
             _registrationProcessor = serviceBusClient.CreateProcessor(QueueName);
-            _orderEmails = serviceBusClient.CreateProcessor("ordertopic", "OrderEmailCreated");
-            _emailService = new EmailSendService();
+            _orderEmails = serviceBusClient.CreateProcessor(topic,subscription);
+            _emailService = new EmailSendService(_configuration);
             _saveToDb = service;
 
         }
@@ -73,11 +77,12 @@ namespace TheJitu_commerce_EmailService.Messaging
            await _registrationProcessor.DisposeAsync();
         }
         private Task ErrorHandler(ProcessErrorEventArgs arg)
-        {   
+        {
 
             //[Todo] send an email to Admin
 
-           throw new NotImplementedException();
+            Console.WriteLine(arg.Exception.ToString());
+            return Task.CompletedTask;
         }
 
         private async Task OnRegistartion(ProcessMessageEventArgs arg)

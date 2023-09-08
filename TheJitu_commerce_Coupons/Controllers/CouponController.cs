@@ -10,7 +10,7 @@ namespace TheJitu_commerce_Coupons.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class CouponController : ControllerBase
     {   
 

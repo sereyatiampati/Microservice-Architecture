@@ -23,6 +23,10 @@ builder.Services.AddScoped<IMessageBus, MessageBus>();
 
 //Services
 builder.Services.AddScoped<IOrderService,OrderService>();
+
+//custom builder services
+builder.AddAppAuthentication();
+builder.AddSwaggenGenExtension();
 var app = builder.Build();
 
 
@@ -38,6 +42,7 @@ if (app.Environment.IsDevelopment())
 app.UseMigration();
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

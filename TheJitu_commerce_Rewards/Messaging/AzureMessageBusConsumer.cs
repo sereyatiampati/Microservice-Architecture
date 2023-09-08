@@ -65,11 +65,12 @@ namespace TheJitu_commerce_Rewards.Messaging
 
       
         private Task ErrorHandler(ProcessErrorEventArgs arg)
-        {   
+        {
 
             //[Todo] send an email to Admin
 
-           throw new NotImplementedException();
+            Console.WriteLine(arg.Exception.ToString());
+            return Task.CompletedTask;
         }
 
        

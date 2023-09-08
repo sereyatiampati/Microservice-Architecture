@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheJitu_Commerce_Cart.Model.Dto;
 using TheJitu_Commerce_Cart.Services.Iservice;
@@ -7,6 +8,7 @@ namespace TheJitu_Commerce_Cart.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CartController : ControllerBase
     {
 

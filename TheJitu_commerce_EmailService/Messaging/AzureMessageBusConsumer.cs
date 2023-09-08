@@ -63,7 +63,7 @@ namespace TheJitu_commerce_EmailService.Messaging
             };
 
             await _emailService.SendEmail(Umessage, sb.ToString());
-
+            await arg.CompleteMessageAsync(message);
         }
 
         public async Task Stop()
